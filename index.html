@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journey Compass - Your Path to Success</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Color Palette */
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #f59e0b;
+            --accent: #10b981;
+            --dark: #1f2937;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            --shadow-lg: 0 25px 50px -12px rgba(0,0,0,0.25);
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--dark);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.4s both;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 30px 60px -10px rgba(0,0,0,0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Blog Section */
+        .blog-section {
+            padding: 6rem 0;
+            background: var(--light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Blog Grid - ARTIGOS LADO A LADO */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .blog-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .blog-image {
+            height: 220px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            position: relative;
+        }
+
+        .blog-image i {
+            font-size: 4rem;
+            opacity: 0.9;
+        }
+
+        .blog-content {
+            padding: 2rem;
+        }
+
+        .blog-date {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+
+        .blog-title:hover {
+            color: var(--primary);
+        }
+
+        .blog-excerpt {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .read-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: var(--primary-dark);
+        }
+
+        .reading-time {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Categories Filter */
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 0.7rem 1.5rem;
+            background: var(--white);
+            border: 2px solid var(--light);
+            border-radius: 50px;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 4rem;
+        }
+
+        .page-btn {
+            padding: 0.8rem 1.2rem;
+            background: var(--white);
+            border: 2px solid var(--light);
+            border-radius: 10px;
+            color: var(--dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .page-btn:hover,
+        .page-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 1rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .categories {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 1rem;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Journey Compass</a>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#blog">Articles</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Journey Compass Blog</h1>
+            <p>Navigate life's challenges with expert insights, practical advice, and inspiring stories</p>
+            <a href="#blog" class="cta-button">Explore Articles</a>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Latest Articles</h2>
+            
+            <!-- Categories Filter -->
+            <div class="categories">
+                <a href="#" class="category-btn active" data-category="all">All</a>
+                <a href="#" class="category-btn" data-category="career">Career</a>
+                <a href="#" class="category-btn" data-category="personal">Personal Growth</a>
+                <a href="#" class="category-btn" data-category="productivity">Productivity</a>
+                <a href="#" class="category-btn" data-category="wellness">Wellness</a>
+            </div>
+
+            <!-- Blog Grid - ARTIGOS LADO A LADO -->
+            <div class="blog-grid">
+                <article class="blog-card fade-in" data-category="career">
+                    <div class="blog-image">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">Oct 15, 2025</div>
+                        <h3 class="blog-title"><a href="#">5 Steps to Land Your Dream Job in 2025</a></h3>
+                        <p class="blog-excerpt">Discover proven strategies to stand out in competitive job markets and secure the career you've always wanted.</p>
+                        <div class="blog-meta">
+                            <div class="reading-time">
+                                <i class="fas fa-clock"></i> 8 min read
+                            </div>
+                            <a href="#" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card fade-in" data-category="personal">
+                    <div class="blog-image">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">Oct 14, 2025</div>
+                        <h3 class="blog-title"><a href="#">How to Find Your True Purpose in Life</a></h3>
+                        <p class="blog-excerpt">Practical exercises and mindset shifts to uncover what truly matters and live with intention every day.</p>
+                        <div class="blog-meta">
+                            <div class="reading-time">
+                                <i class="fas fa-clock"></i> 12 min read
+                            </div>
+                            <a href="#" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card fade-in" data-category="productivity">
+                    <div class="blog-image">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">Oct 13, 2025</div>
+                        <h3 class="blog-title"><a href="#">The Ultimate Productivity System for Busy Professionals</a></h3>
+                        <p class="blog-excerpt">Get 3x more done with our step-by-step system that combines science, tech, and psychology.</p>
+                        <div class="blog-meta">
+                            <div class="reading-time">
+                                <i class="fas fa-clock"></i> 10 min read
+                            </div>
+                            <a href="#" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card fade-in" data-category="wellness">
+                    <div class="blog-image">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">Oct 12, 2025</div>
+                        <h3 class="blog-title"><a href="#">Morning Routines of Highly Successful People</a></h3>
+                        <p class="blog-excerpt">Steal these 7 habits from CEOs, athletes, and leaders to transform your mornings and your life.</p>
+                        <div class="blog-meta">
+                            <div class="reading-time">
+                                <i class="fas fa-clock"></i> 7 min read
+                            </div>
+                            <a href="#" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card fade-in" data-category="career">
+                    <div class="blog-image">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">Oct 11, 2025</div>
+                        <h3 class="blog-title"><a href="#">How to Negotiate a 20% Salary Increase</a></h3>
+                        <p class="blog-excerpt">Script templates, timing tips, and psychology hacks to get paid what you're really worth.</p>
+                        <div class="blog-meta">
+                            <div class="reading-time">
+                                <i class="fas fa-clock"></i> 9 min read
+                            </div>
+                            <a href="#" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card fade-in" data-category="productivity">
+                    <div class="blog-image">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">Oct 10, 2025</div>
+                        <h3 class="blog-title"><a href="#">10 Apps That Will Double Your Productivity</a></h3>
+                        <p class="blog-excerpt">Curated list of tools used by top performers, with setup guides and real results.</p>
+                        <div class="blog-meta">
+                            <div class="reading-time">
+                                <i class="fas fa-clock"></i> 6 min read
+                            </div>
+                            <a href="#" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="#" class="page-btn">← Previous</a>
+                <a href="#" class="page-btn active">1</a>
+                <a href="#" class="page-btn">2</a>
+                <a href="#" class="page-btn">3</a>
+                <a href="#" class="page-btn">Next →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Journey Compass</h3>
+                    <p>Your trusted guide to life's greatest adventures through practical wisdom</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <a href="#">Career</a>
+                    <a href="#">Personal Growth</a>
+                    <a href="#">Productivity</a>
+                    <a href="#">Wellness</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#home">Home</a>
+                    <a href="#blog">Articles</a>
+                    <a href="#">About</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem;">
+                        <i class="fab fa-twitter" style="font-size: 1.5rem; color: var(--accent);"></i>
+                        <i class="fab fa-linkedin" style="font-size: 1.5rem; color: var(--accent);"></i>
+                        <i class="fab fa-instagram" style="font-size: 1.5rem; color: var(--accent);"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Journey Compass. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Categories Filter
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const blogCards = document.querySelectorAll('.blog-card');
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Update active button
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const category = btn.dataset.category;
+
+                // Filter cards
+                blogCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                        card.classList.add('fade-in');
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
